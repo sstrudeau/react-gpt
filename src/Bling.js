@@ -763,7 +763,7 @@ class Bling extends Component {
 
     render() {
         const {scriptLoaded} = this.state;
-        const {id, outOfPage, style} = this.props;
+        const {id, className, outOfPage, style} = this.props;
         const shouldNotRender = this.notInViewport(this.props, this.state);
 
         if (!scriptLoaded || shouldNotRender) {
@@ -802,9 +802,7 @@ class Bling extends Component {
         }
         this._divId = id || Bling._adManager.generateDivId();
 
-        return (
-            <div className={this.className} id={this._divId} style={style} />
-        );
+        return <div className={className} id={this._divId} style={style} />;
     }
 
     /**

@@ -109,7 +109,6 @@
         "build:es": "BABEL_ENV=es babel --copy-files ./src -d es",
         "build:umd": "NODE_ENV=development webpack src/index.js dist/react-gpt.js",
         "build:umd:min": "NODE_ENV=production webpack -p src/index.js dist/react-gpt.min.js",
-        "build:all": "npm run build && npm run build:es && npm run build:umd && npm run build:umd:min",
         "bundlesize": "npm run build:umd:min && bundlesize",
         "clean": "rimraf lib coverage dist lib es",
         "compile": "babel src --out-dir lib",
@@ -119,7 +118,8 @@
         "pretest": "npm run build",
         "prepublish": "npm run build && npm run build:es && npm run build:umd && npm run build:umd:min",
         "test": "npm run lint && karma start",
-        "update-apilist": "node ./scripts/updateAPIList.js"
+        "update-apilist": "node ./scripts/updateAPIList.js",
+        "prepare": "npm run build"
     },
     "config": {
         "commitizen": {
