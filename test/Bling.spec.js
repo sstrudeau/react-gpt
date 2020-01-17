@@ -202,6 +202,41 @@ describe("Bling", () => {
         );
     });
 
+    it("call pubads API to set restricted data processing when restrictedDataProcessing prop is set", done => {
+        const spy = sinon.stub(Bling._adManager, "pubadsProxy");
+        const expectedParamTrue = {
+            method: "setPrivacySettings",
+            args: [{restrictDataProcessing: true}],
+            resolve: null,
+            reject: null
+        };
+
+        Bling.once(Events.RENDER, () => {
+            expect(spy.calledWith(expectedParamTrue)).to.be.true;
+            // expect(spy.calledWith(expectedParamFalse)).to.be.true;
+            spy.restore();
+            done();
+        });
+
+        // Render once to test with non-personalized ads
+        ReactTestUtils.renderIntoDocument(
+            <Bling
+                adUnitPath="/4595/nfl.test.open"
+                restrictDataProcessing={true}
+                slotSize={["fluid"]}
+            />
+        );
+
+        // Render a second time to test re-enable personalized ads
+        ReactTestUtils.renderIntoDocument(
+            <Bling
+                adUnitPath="/4595/nfl.test.open"
+                restrictDataProcessing={false}
+                slotSize={["fluid"]}
+            />
+        );
+    });
+
     it("fires once event", done => {
         const events = Object.keys(Events).map(key => Events[key]);
 
