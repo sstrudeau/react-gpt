@@ -413,6 +413,7 @@ export class AdManager extends EventEmitter {
         });
     });
 
+    /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }]*/
     /**
      * Re-render(not refresh) all the ads in the page and the first ad will update the correlator value.
      * Updating correlator value ensures competitive exclusion.
@@ -427,7 +428,7 @@ export class AdManager extends EventEmitter {
 
         // first instance updates correlator value and re-render each ad
         const instances = this.getMountedInstances();
-        instances.forEach((instance, i) => {
+        instances.forEach((instance, _i) => {
             instance.forceUpdate();
         });
 
