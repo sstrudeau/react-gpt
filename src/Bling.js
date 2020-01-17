@@ -213,7 +213,16 @@ class Bling extends Component {
          *
          * @property npa
          */
-        npa: PropTypes.bool
+        npa: PropTypes.bool,
+        /**
+         * An optional property to control restrict data processing for privacy regulatory compliance.
+         * https://developers.google.com/doubleclick-gpt/reference#googletag.PrivacySettingsConfig_restrictDataProcessing
+         *
+         * It is `false` by default, according to Google's definition.
+         *
+         * @property restrictDataProcessing
+         */
+        restrictDataProcessing: PropTypes.bool
     };
 
     /**
@@ -244,7 +253,8 @@ class Bling extends Component {
         "slotSize",
         "outOfPage",
         "content",
-        "npa"
+        "npa",
+        "restrictDataProcessing"
     ];
     /**
      * An instance of ad manager.
@@ -621,11 +631,12 @@ class Bling extends Component {
     }
 
     defineSlot() {
-        const {adUnitPath, outOfPage, npa} = this.props;
+        const {adUnitPath, outOfPage, npa, restrictDataProcessing} = this.props;
         const divId = this._divId;
         const slotSize = this.getSlotSize();
 
         this.handleSetNpaFlag(npa);
+        this.handleSetRestrictDataProcessingFlag(restrictDataProcessing);
 
         if (!this._adSlot) {
             if (outOfPage) {
@@ -809,6 +820,29 @@ class Bling extends Component {
         Bling._adManager.pubadsProxy({
             method: "setRequestNonPersonalizedAds",
             args: [npa ? 1 : 0],
+            resolve: null,
+            reject: null
+        });
+    }
+
+    /**
+     * Call pubads and set the restrict data Ads flag, if it is not undefined.
+     *
+     * @param {boolean} restrictDataProcessing
+     */
+    handleSetRestrictDataProcessingFlag(restrictDataProcessing) {
+        if (
+            restrictDataProcessing !== true
+        ) {
+            return;
+        }
+        Bling._adManager.pubadsProxy({
+            method: "setPrivacySettings",
+            args: [
+                {
+                    restrictDataProcessing: true
+                }
+            ],
             resolve: null,
             reject: null
         });
