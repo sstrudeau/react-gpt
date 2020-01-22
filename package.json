@@ -1,18 +1,18 @@
 {
     "name": "react-gpt",
-    "version": "2.0.13",
+    "version": "2.0.14",
     "description": "A react display ad component using Google Publisher Tag",
     "main": "lib/index.js",
     "jsnext:main": "es/index.js",
     "contributors": [
         {
-            "name": "NFL Engineering"
+            "name": "NFL Engineering - fork"
         }
     ],
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "https://github.com/nfl/react-gpt"
+        "url": "https://github.com/sstrudeau/react-gpt"
     },
     "keywords": [
         "react-gpt",
@@ -23,7 +23,7 @@
         "google publisher tags"
     ],
     "bugs": {
-        "url": "https://github.com/nfl/react-gpt/issues"
+        "url": "https://github.com/sstrudeau/react-gpt/issues"
     },
     "files": [
         "*.md",
